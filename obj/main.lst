@@ -1,0 +1,103 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.5.0 #9253 (Sep 26 2015) (Linux)
+                              4 ; This file was generated Fri Oct  2 22:50:00 2015
+                              5 ;--------------------------------------------------------
+                              6 	.module main
+                              7 	.optsdcc -mz80
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _main
+                             13 	.globl _init
+                             14 	.globl _game
+                             15 	.globl _cpct_setPALColour
+                             16 	.globl _cpct_setPalette
+                             17 	.globl _cpct_fw2hw
+                             18 	.globl _cpct_setVideoMode
+                             19 	.globl _cpct_disableFirmware
+                             20 ;--------------------------------------------------------
+                             21 ; special function registers
+                             22 ;--------------------------------------------------------
+                             23 ;--------------------------------------------------------
+                             24 ; ram data
+                             25 ;--------------------------------------------------------
+                             26 	.area _DATA
+                             27 ;--------------------------------------------------------
+                             28 ; ram data
+                             29 ;--------------------------------------------------------
+                             30 	.area _INITIALIZED
+                             31 ;--------------------------------------------------------
+                             32 ; absolute external ram data
+                             33 ;--------------------------------------------------------
+                             34 	.area _DABS (ABS)
+                             35 ;--------------------------------------------------------
+                             36 ; global & static initialisations
+                             37 ;--------------------------------------------------------
+                             38 	.area _HOME
+                             39 	.area _GSINIT
+                             40 	.area _GSFINAL
+                             41 	.area _GSINIT
+                             42 ;--------------------------------------------------------
+                             43 ; Home
+                             44 ;--------------------------------------------------------
+                             45 	.area _HOME
+                             46 	.area _HOME
+                             47 ;--------------------------------------------------------
+                             48 ; code
+                             49 ;--------------------------------------------------------
+                             50 	.area _CODE
+                             51 ;src/main.c:6: void init(){
+                             52 ;	---------------------------------
+                             53 ; Function init
+                             54 ; ---------------------------------
+   0000                      55 _init::
+                             56 ;src/main.c:8: cpct_disableFirmware();
+   0000 CDr00r00      [17]   57 	call	_cpct_disableFirmware
+                             58 ;src/main.c:10: cpct_fw2hw     (g_palette, 4);
+   0003 11r00r00      [10]   59 	ld	de,#_g_palette
+   0006 3E 04         [ 7]   60 	ld	a,#0x04
+   0008 F5            [11]   61 	push	af
+   0009 33            [ 6]   62 	inc	sp
+   000A D5            [11]   63 	push	de
+   000B CDr00r00      [17]   64 	call	_cpct_fw2hw
+   000E F1            [10]   65 	pop	af
+   000F 33            [ 6]   66 	inc	sp
+                             67 ;src/main.c:11: cpct_setPalette(g_palette, 4);
+   0010 11r00r00      [10]   68 	ld	de,#_g_palette
+   0013 3E 04         [ 7]   69 	ld	a,#0x04
+   0015 F5            [11]   70 	push	af
+   0016 33            [ 6]   71 	inc	sp
+   0017 D5            [11]   72 	push	de
+   0018 CDr00r00      [17]   73 	call	_cpct_setPalette
+   001B F1            [10]   74 	pop	af
+   001C 33            [ 6]   75 	inc	sp
+                             76 ;src/main.c:12: cpct_setBorder (g_palette[3]);
+   001D 3Ar03r00      [13]   77 	ld	a, (#_g_palette + 3)
+   0020 57            [ 4]   78 	ld	d,a
+   0021 1E 10         [ 7]   79 	ld	e,#0x10
+   0023 D5            [11]   80 	push	de
+   0024 CDr00r00      [17]   81 	call	_cpct_setPALColour
+                             82 ;src/main.c:14: cpct_setVideoMode(1);
+   0027 3E 01         [ 7]   83 	ld	a,#0x01
+   0029 F5            [11]   84 	push	af
+   002A 33            [ 6]   85 	inc	sp
+   002B CDr00r00      [17]   86 	call	_cpct_setVideoMode
+   002E 33            [ 6]   87 	inc	sp
+   002F C9            [10]   88 	ret
+                             89 ;src/main.c:17: void main(void) {
+                             90 ;	---------------------------------
+                             91 ; Function main
+                             92 ; ---------------------------------
+   0030                      93 _main::
+                             94 ;src/main.c:19: init();         
+   0030 CDr00r00      [17]   95 	call	_init
+                             96 ;src/main.c:21: while (1){
+   0033                      97 00102$:
+                             98 ;src/main.c:22: game();
+   0033 CDr00r00      [17]   99 	call	_game
+   0036 18 FB         [12]  100 	jr	00102$
+                            101 	.area _CODE
+                            102 	.area _INITIALIZER
+                            103 	.area _CABS (ABS)
