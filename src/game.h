@@ -6,8 +6,6 @@
 //
 // Functions defined in the game module
 //
-void initializeGameScreen ();
-void updateUser           ();
 void game                 ();
 
 #endif

@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.5.0 #9253 (Sep 26 2015) (Linux)
-; This file was generated Fri Oct  2 22:50:00 2015
+; This file was generated Mon Oct  5 17:09:31 2015
 ;--------------------------------------------------------
 	.module game
 	.optsdcc -mz80
@@ -63,12 +63,12 @@ _pvideomem::
 ; code
 ;--------------------------------------------------------
 	.area _CODE
-;src/game.c:21: void initializeGameScreen() {
+;src/game.c:23: void initializeGameScreen() {
 ;	---------------------------------
 ; Function initializeGameScreen
 ; ---------------------------------
 _initializeGameScreen::
-;src/game.c:23: cpct_drawSolidBox(INIT_VMEM, cpct_px2byteM1(1, 1, 1, 1), 64, 200);
+;src/game.c:25: cpct_drawSolidBox(INIT_VMEM, cpct_px2byteM1(1, 1, 1, 1), 64, 200);
 	ld	hl,#0x0101
 	push	hl
 	ld	l, #0x01
@@ -87,7 +87,7 @@ _initializeGameScreen::
 	pop	af
 	pop	af
 	inc	sp
-;src/game.c:24: cpct_drawSolidBox(INIT_VMEM + 64, cpct_px2byteM1(1, 1, 1, 1), 16, 200);
+;src/game.c:26: cpct_drawSolidBox(INIT_VMEM + 64, cpct_px2byteM1(1, 1, 1, 1), 16, 200);
 	ld	hl,#0x0101
 	push	hl
 	ld	l, #0x01
@@ -107,14 +107,14 @@ _initializeGameScreen::
 	pop	af
 	inc	sp
 	ret
-;src/game.c:27: void updateUser() {
+;src/game.c:29: void updateUser() {
 ;	---------------------------------
 ; Function updateUser
 ; ---------------------------------
 _updateUser::
-;src/game.c:30: cpct_scanKeyboard_f();
+;src/game.c:32: cpct_scanKeyboard_f();
 	call	_cpct_scanKeyboard_f
-;src/game.c:31: if      (cpct_isKeyPressed(Key_CursorRight) && x <  80 - SPR_W) { x++; pvideomem++; }
+;src/game.c:33: if      (cpct_isKeyPressed(Key_CursorRight) && x <  80 - SPR_W) { x++; pvideomem++; }
 	ld	hl,#0x0200
 	call	_cpct_isKeyPressed
 	ld	a,l
@@ -132,7 +132,7 @@ _updateUser::
 	inc	(hl)
 	jr	00106$
 00105$:
-;src/game.c:32: else if (cpct_isKeyPressed(Key_CursorLeft)  && x >   0        ) { x--; pvideomem--; }
+;src/game.c:34: else if (cpct_isKeyPressed(Key_CursorLeft)  && x >   0        ) { x--; pvideomem--; }
 	ld	hl,#0x0101
 	call	_cpct_isKeyPressed
 	ld	a,l
@@ -147,7 +147,7 @@ _updateUser::
 	dec	hl
 	ld	(_pvideomem),hl
 00106$:
-;src/game.c:33: if      (cpct_isKeyPressed(Key_CursorUp)    && y >   0        ) { 
+;src/game.c:35: if      (cpct_isKeyPressed(Key_CursorUp)    && y >   0        ) { 
 	ld	hl,#0x0100
 	call	_cpct_isKeyPressed
 	ld	a,l
@@ -156,12 +156,12 @@ _updateUser::
 	ld	a,(#_y + 0)
 	or	a, a
 	jr	Z,00112$
-;src/game.c:34: y = y-3;
+;src/game.c:36: y = y-3;
 	ld	hl,#_y
 	ld	a,(hl)
 	add	a,#0xFD
 	ld	(hl),a
-;src/game.c:35: pvideomem = cpct_getScreenPtr(INIT_VMEM, x, y); 
+;src/game.c:37: pvideomem = cpct_getScreenPtr(INIT_VMEM, x, y); 
 	ld	a,(_y)
 	push	af
 	inc	sp
@@ -174,7 +174,7 @@ _updateUser::
 	ld	(_pvideomem),hl
 	ret
 00112$:
-;src/game.c:37: else if (cpct_isKeyPressed(Key_CursorDown)  && y < 197 - SPR_H) { 
+;src/game.c:39: else if (cpct_isKeyPressed(Key_CursorDown)  && y < 197 - SPR_H) { 
 	ld	hl,#0x0400
 	call	_cpct_isKeyPressed
 	ld	a,l
@@ -183,14 +183,14 @@ _updateUser::
 	ld	a,(#_y + 0)
 	sub	a, #0xB5
 	ret	NC
-;src/game.c:38: y = y+3;
+;src/game.c:40: y = y+3;
 	ld	hl, #_y+0
 	inc	(hl)
 	ld	hl, #_y+0
 	inc	(hl)
 	ld	hl, #_y+0
 	inc	(hl)
-;src/game.c:39: pvideomem = cpct_getScreenPtr(INIT_VMEM, x, y); 
+;src/game.c:41: pvideomem = cpct_getScreenPtr(INIT_VMEM, x, y); 
 	ld	a,(_y)
 	push	af
 	inc	sp
@@ -202,12 +202,12 @@ _updateUser::
 	call	_cpct_getScreenPtr
 	ld	(_pvideomem),hl
 	ret
-;src/game.c:42: void drawAll(){
+;src/game.c:44: void drawAll(){
 ;	---------------------------------
 ; Function drawAll
 ; ---------------------------------
 _drawAll::
-;src/game.c:44: cpct_drawSpriteMasked(g_character, pvideomem, SPR_W, SPR_H);
+;src/game.c:46: cpct_drawSpriteMasked(g_character, pvideomem, SPR_W, SPR_H);
 	ld	bc,(_pvideomem)
 	ld	de,#_g_character
 	ld	hl,#0x1004
@@ -216,32 +216,32 @@ _drawAll::
 	push	de
 	call	_cpct_drawSpriteMasked
 	ret
-;src/game.c:47: void game() {
+;src/game.c:49: void game() {
 ;	---------------------------------
 ; Function game
 ; ---------------------------------
 _game::
-;src/game.c:49: alive = 1;
+;src/game.c:51: alive = 1;
 	ld	hl,#_alive + 0
 	ld	(hl), #0x01
-;src/game.c:50: x=0, y=0;
+;src/game.c:52: x=0, y=0;
 	ld	hl,#_x + 0
 	ld	(hl), #0x00
 	ld	hl,#_y + 0
 	ld	(hl), #0x00
-;src/game.c:51: pvideomem = INIT_VMEM; 
+;src/game.c:53: pvideomem = INIT_VMEM; 
 	ld	hl,#0xC000
 	ld	(_pvideomem),hl
-;src/game.c:53: initializeGameScreen();   // Set up Game Screen
+;src/game.c:55: initializeGameScreen();   // Set up Game Screen
 	call	_initializeGameScreen
-;src/game.c:58: while(alive) {
+;src/game.c:60: while(alive) {
 00101$:
 	ld	a,(#_alive + 0)
 	or	a, a
 	ret	Z
-;src/game.c:59: cpct_waitVSYNC();            
+;src/game.c:61: cpct_waitVSYNC();            
 	call	_cpct_waitVSYNC
-;src/game.c:61: cpct_drawSolidBox(pvideomem, cpct_px2byteM1(1, 1, 1, 1), SPR_W, SPR_H);
+;src/game.c:63: cpct_drawSolidBox(pvideomem, cpct_px2byteM1(1, 1, 1, 1), SPR_W, SPR_H);
 	ld	hl,#0x0101
 	push	hl
 	ld	l, #0x01
@@ -260,9 +260,9 @@ _game::
 	pop	af
 	pop	af
 	inc	sp
-;src/game.c:62: updateUser();                
+;src/game.c:64: updateUser();                
 	call	_updateUser
-;src/game.c:63: drawAll();                   
+;src/game.c:65: drawAll();                   
 	call	_drawAll
 	jr	00101$
 	.area _CODE

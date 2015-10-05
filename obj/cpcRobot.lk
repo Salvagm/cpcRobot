@@ -9,6 +9,7 @@
 -l z80
 obj/game.rel
 obj/main.rel
+obj/entities/entities.rel
 obj/sprites/sprites.rel
 
 -e

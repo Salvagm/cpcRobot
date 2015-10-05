@@ -89,6 +89,7 @@ Files Linked                              [ module(s) ]
 
 obj/game.rel                              [ game ]
 obj/main.rel                              [ main ]
+obj/entities/entities.rel                 [ entities ]
 obj/sprites/sprites.rel                   [ sprites ]
 
 

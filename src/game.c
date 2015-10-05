@@ -14,6 +14,8 @@ u8  x, y;      // Sprite coordinates (in bytes)
 /** PARTE PRIVADA **/
 
 u8* pvideomem;    // Inicio memoria de video
+void initializeGameScreen ();
+void updateUser           ();
 
 /** FIN PARTE PRIVADA **/
 
