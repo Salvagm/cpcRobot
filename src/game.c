@@ -30,27 +30,28 @@ void updateUser() {
    u8  *x, *y;
    x = &(player->pe.de.e.c.x);
    y = &(player->pe.de.e.c.y);
+   player->pe.de.e.pscreen = player->pe.de.npscreen;
    //Comprobamos si se pulsa alguna tecla y movemos al personaje principal
    cpct_scanKeyboard_f();
    if      (cpct_isKeyPressed(Key_CursorRight) && (*x) <  80 - SPR_W) { 
-      pvideomem = cpct_getScreenPtr(INIT_VMEM,++(*x),*y);
+      player->pe.de.npscreen = cpct_getScreenPtr(INIT_VMEM,++(*x),*y);
    }
    else if (cpct_isKeyPressed(Key_CursorLeft)  && (*x) >   0        ) {
-      pvideomem = cpct_getScreenPtr(INIT_VMEM,--(*x),*y);
+      player->pe.de.npscreen = cpct_getScreenPtr(INIT_VMEM,--(*x),*y);
    }
    if      (cpct_isKeyPressed(Key_CursorUp)    && *y >   0        ) { 
       *y = (*y)-3;
-      pvideomem = cpct_getScreenPtr(INIT_VMEM, *x, *y); 
+      player->pe.de.npscreen = cpct_getScreenPtr(INIT_VMEM, *x, *y); 
    }
    else if (cpct_isKeyPressed(Key_CursorDown)  && *y < 197 - SPR_H) { 
       *y = (*y)+3;
-      pvideomem = cpct_getScreenPtr(INIT_VMEM, *x, *y); 
+      player->pe.de.npscreen = cpct_getScreenPtr(INIT_VMEM, *x, *y); 
    }
 
 }
 void drawAll(){
-   
-   cpct_drawSpriteMasked(player->pe.de.e.sprite, pvideomem, SPR_W, SPR_H);
+   cpct_drawSolidBox(player->pe.de.e.pscreen, cpct_px2byteM1(1, 1, 1, 1), SPR_W, SPR_H);
+   cpct_drawSpriteMasked(player->pe.de.e.sprite, player->pe.de.npscreen, SPR_W, SPR_H);
 }
 
 void game() {
@@ -71,7 +72,6 @@ void game() {
    while(player->lifes > 0) {      
       cpct_waitVSYNC();            
       //Limpiamos la posicion del personaje 
-      cpct_drawSolidBox(pvideomem, cpct_px2byteM1(1, 1, 1, 1), SPR_W, SPR_H);
       updateUser();                
       drawAll();                   
    }

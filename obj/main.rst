@@ -52,46 +52,46 @@
                              52 ;	---------------------------------
                              53 ; Function init
                              54 ; ---------------------------------
-   0253                      55 _init::
+   02C6                      55 _init::
                              56 ;src/main.c:8: cpct_disableFirmware();
-   0253 CD 57 04      [17]   57 	call	_cpct_disableFirmware
+   02C6 CD CA 04      [17]   57 	call	_cpct_disableFirmware
                              58 ;src/main.c:10: cpct_fw2hw     (g_palette, 4);
-   0256 21 87 02      [10]   59 	ld	hl,#_g_palette
-   0259 01 04 00      [10]   60 	ld	bc,#0x0004
-   025C C5            [11]   61 	push	bc
-   025D E5            [11]   62 	push	hl
-   025E CD BA 03      [17]   63 	call	_cpct_fw2hw
+   02C9 21 FA 02      [10]   59 	ld	hl,#_g_palette
+   02CC 01 04 00      [10]   60 	ld	bc,#0x0004
+   02CF C5            [11]   61 	push	bc
+   02D0 E5            [11]   62 	push	hl
+   02D1 CD 2D 04      [17]   63 	call	_cpct_fw2hw
                              64 ;src/main.c:11: cpct_setPalette(g_palette, 4);
-   0261 21 87 02      [10]   65 	ld	hl,#_g_palette
-   0264 01 04 00      [10]   66 	ld	bc,#0x0004
-   0267 C5            [11]   67 	push	bc
-   0268 E5            [11]   68 	push	hl
-   0269 CD 21 03      [17]   69 	call	_cpct_setPalette
+   02D4 21 FA 02      [10]   65 	ld	hl,#_g_palette
+   02D7 01 04 00      [10]   66 	ld	bc,#0x0004
+   02DA C5            [11]   67 	push	bc
+   02DB E5            [11]   68 	push	hl
+   02DC CD 94 03      [17]   69 	call	_cpct_setPalette
                              70 ;src/main.c:12: cpct_setBorder (g_palette[3]);
-   026C 3A 8A 02      [13]   71 	ld	a, (#_g_palette + 3)
-   026F 57            [ 4]   72 	ld	d,a
-   0270 1E 10         [ 7]   73 	ld	e,#0x10
-   0272 D5            [11]   74 	push	de
-   0273 CD AE 03      [17]   75 	call	_cpct_setPALColour
+   02DF 3A FD 02      [13]   71 	ld	a, (#_g_palette + 3)
+   02E2 57            [ 4]   72 	ld	d,a
+   02E3 1E 10         [ 7]   73 	ld	e,#0x10
+   02E5 D5            [11]   74 	push	de
+   02E6 CD 21 04      [17]   75 	call	_cpct_setPALColour
                              76 ;src/main.c:14: cpct_setVideoMode(1);
-   0276 3E 01         [ 7]   77 	ld	a,#0x01
-   0278 F5            [11]   78 	push	af
-   0279 33            [ 6]   79 	inc	sp
-   027A CD 21 04      [17]   80 	call	_cpct_setVideoMode
-   027D 33            [ 6]   81 	inc	sp
-   027E C9            [10]   82 	ret
+   02E9 3E 01         [ 7]   77 	ld	a,#0x01
+   02EB F5            [11]   78 	push	af
+   02EC 33            [ 6]   79 	inc	sp
+   02ED CD 94 04      [17]   80 	call	_cpct_setVideoMode
+   02F0 33            [ 6]   81 	inc	sp
+   02F1 C9            [10]   82 	ret
                              83 ;src/main.c:17: void main(void) {
                              84 ;	---------------------------------
                              85 ; Function main
                              86 ; ---------------------------------
-   027F                      87 _main::
+   02F2                      87 _main::
                              88 ;src/main.c:19: init();         
-   027F CD 53 02      [17]   89 	call	_init
+   02F2 CD C6 02      [17]   89 	call	_init
                              90 ;src/main.c:21: while (1){
-   0282                      91 00102$:
+   02F5                      91 00102$:
                              92 ;src/main.c:22: game();
-   0282 CD 12 02      [17]   93 	call	_game
-   0285 18 FB         [12]   94 	jr	00102$
+   02F5 CD A3 02      [17]   93 	call	_game
+   02F8 18 FB         [12]   94 	jr	00102$
                              95 	.area _CODE
                              96 	.area _INITIALIZER
                              97 	.area _CABS (ABS)

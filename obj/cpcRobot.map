@@ -19,69 +19,69 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000000  s__DABS                         
      00000004  l__DATA                         
      00000100  s__CODE                         
-     000004CB  l__CODE                         
-     000005CB  s__DATA                         
-     000005CF  s__GSFINAL                      
-     000005CF  s__GSINIT                       
-     000005CF  s__HOME                         
-     000005CF  s__INITIALIZED                  
-     000005CF  s__INITIALIZER                  
+     0000053E  l__CODE                         
+     0000063E  s__DATA                         
+     00000642  s__GSFINAL                      
+     00000642  s__GSINIT                       
+     00000642  s__HOME                         
+     00000642  s__INITIALIZED                  
+     00000642  s__INITIALIZER                  
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00000100    000004CB =        1227. bytes (REL,CON)
+_CODE                               00000100    0000053E =        1342. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
      00000100  _initializeGameScreen              game
      0000013B  _updateUser                        game
-     000001FC  _drawAll                           game
-     00000212  _game                              game
-     00000253  _init                              main
-     0000027F  _main                              main
-     00000287  _g_palette                         sprites
-     0000028B  _g_character                       sprites
-     0000030B  _getPlayer                         entities
-     0000030F  _character                         entities
-     00000321  _cpct_setPalette                   cpct_video
-     00000338  _cpct_isKeyPressed                 cpct_keyboard
-     00000338  cpct_isKeyPressed_asm              cpct_keyboard
-     00000344  _cpct_scanKeyboard_f               cpct_keyboard
-     00000344  cpct_scanKeyboard_f_asm            cpct_keyboard
-     000003AE  _cpct_setPALColour                 cpct_video
-     000003BA  _cpct_fw2hw                        cpct_video
-     000003CD  _cpct_keyboardStatusBuffer         cpct_keyboard
-     000003D7  _cpct_drawSpriteMasked             cpct_sprites
-     00000406  cpct_firmware2hw_colour            
-     00000421  _cpct_setVideoMode                 cpct_video
-     00000426  cpct_setVideoMode_asm              cpct_video
-     00000433  _cpct_waitVSYNC                    cpct_video
-     00000433  cpct_waitVSYNC_asm                 cpct_video
-     0000043B  _cpct_px2byteM1                    cpct_sprites
-     00000454  _cpct_mode_rom_status              cpct_firmware
-     00000455  _cpct_firmware_address             cpct_firmware
-     00000457  _cpct_disableFirmware              cpct_firmware
-     00000457  cpct_disableFirmware_asm           cpct_firmware
-     00000468  _cpct_drawSolidBox                 cpct_sprites
-     00000520  _cpct_getScreenPtr                 cpct_video
-     00000540  dc_mode1_ct                        cpct_strings
-     00000544  _cpct_drawCharM1                   cpct_strings
-     00000551  cpct_drawCharM1_asm                cpct_strings
+     00000265  _drawAll                           game
+     000002A3  _game                              game
+     000002C6  _init                              main
+     000002F2  _main                              main
+     000002FA  _g_palette                         sprites
+     000002FE  _g_character                       sprites
+     0000037E  _getPlayer                         entities
+     00000382  _character                         entities
+     00000394  _cpct_setPalette                   cpct_video
+     000003AB  _cpct_isKeyPressed                 cpct_keyboard
+     000003AB  cpct_isKeyPressed_asm              cpct_keyboard
+     000003B7  _cpct_scanKeyboard_f               cpct_keyboard
+     000003B7  cpct_scanKeyboard_f_asm            cpct_keyboard
+     00000421  _cpct_setPALColour                 cpct_video
+     0000042D  _cpct_fw2hw                        cpct_video
+     00000440  _cpct_keyboardStatusBuffer         cpct_keyboard
+     0000044A  _cpct_drawSpriteMasked             cpct_sprites
+     00000479  cpct_firmware2hw_colour            
+     00000494  _cpct_setVideoMode                 cpct_video
+     00000499  cpct_setVideoMode_asm              cpct_video
+     000004A6  _cpct_waitVSYNC                    cpct_video
+     000004A6  cpct_waitVSYNC_asm                 cpct_video
+     000004AE  _cpct_px2byteM1                    cpct_sprites
+     000004C7  _cpct_mode_rom_status              cpct_firmware
+     000004C8  _cpct_firmware_address             cpct_firmware
+     000004CA  _cpct_disableFirmware              cpct_firmware
+     000004CA  cpct_disableFirmware_asm           cpct_firmware
+     000004DB  _cpct_drawSolidBox                 cpct_sprites
+     00000593  _cpct_getScreenPtr                 cpct_video
+     000005B3  dc_mode1_ct                        cpct_strings
+     000005B7  _cpct_drawCharM1                   cpct_strings
+     000005C4  cpct_drawCharM1_asm                cpct_strings
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_DATA                               000005CB    00000004 =           4. bytes (REL,CON)
+_DATA                               0000063E    00000004 =           4. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     000005CB  _player                            game
-     000005CD  _pvideomem                         game
+     0000063E  _player                            game
+     00000640  _pvideomem                         game
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
 

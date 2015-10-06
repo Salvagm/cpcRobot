@@ -46,26 +46,26 @@
                              46 ;	---------------------------------
                              47 ; Function getPlayer
                              48 ; ---------------------------------
-   030B                      49 _getPlayer::
+   037E                      49 _getPlayer::
                              50 ;src/entities/entities.c:37: return &character;
-   030B 21 0F 03      [10]   51 	ld	hl,#_character
-   030E C9            [10]   52 	ret
-   030F                      53 _character:
-   030F 00 C0                54 	.dw #0xC000
-   0311 8B 02                55 	.dw _g_character
-   0313 00                   56 	.db #0x00	; 0
-   0314 00                   57 	.db #0x00	; 0
-   0315 04                   58 	.db #0x04	; 4
-   0316 10                   59 	.db #0x10	; 16
-   0317 00 C0                60 	.dw #0xC000
-   0319 01                   61 	.db #0x01	; 1
-   031A 01                   62 	.db #0x01	; 1
-   031B 00                   63 	.db #0x00	;  0
-   031C 00                   64 	.db #0x00	;  0
-   031D 00                   65 	.db #0x00	; 0
-   031E 00                   66 	.db #0x00	; 0
-   031F 01                   67 	.db #0x01	; 1
-   0320 03                   68 	.db #0x03	; 3
+   037E 21 82 03      [10]   51 	ld	hl,#_character
+   0381 C9            [10]   52 	ret
+   0382                      53 _character:
+   0382 00 C0                54 	.dw #0xC000
+   0384 FE 02                55 	.dw _g_character
+   0386 00                   56 	.db #0x00	; 0
+   0387 00                   57 	.db #0x00	; 0
+   0388 04                   58 	.db #0x04	; 4
+   0389 10                   59 	.db #0x10	; 16
+   038A 00 C0                60 	.dw #0xC000
+   038C 01                   61 	.db #0x01	; 1
+   038D 01                   62 	.db #0x01	; 1
+   038E 00                   63 	.db #0x00	;  0
+   038F 00                   64 	.db #0x00	;  0
+   0390 00                   65 	.db #0x00	; 0
+   0391 00                   66 	.db #0x00	; 0
+   0392 01                   67 	.db #0x01	; 1
+   0393 03                   68 	.db #0x03	; 3
                              69 	.area _CODE
                              70 	.area _INITIALIZER
                              71 	.area _CABS (ABS)

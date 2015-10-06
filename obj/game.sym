@@ -14,8 +14,8 @@ Symbol Table
     _cpct_px2byteM1                                                **** GX
     _cpct_scanKeyboard_f                                           **** GX
     _cpct_waitVSYNC                                                **** GX
-  0 _drawAll                                                       00FC GR
-  0 _game                                                          0112 GR
+  0 _drawAll                                                       0165 GR
+  0 _game                                                          01A3 GR
     _getPlayer                                                     **** GX
   0 _initializeGameScreen                                          0000 GR
   1 _player                                                        0000 GR
@@ -27,7 +27,7 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size  153   flags    0
+   0 _CODE                                      size  1C6   flags    0
    1 _DATA                                      size    4   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8
