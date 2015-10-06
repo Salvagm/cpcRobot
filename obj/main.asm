@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
-; Version 3.5.0 #9253 (Sep 26 2015) (Linux)
-; This file was generated Mon Oct  5 21:06:19 2015
+; Version 3.5.4 #9329 (Linux)
+; This file was generated Tue Oct  6 15:22:14 2015
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mz80
@@ -56,23 +56,17 @@ _init::
 ;src/main.c:8: cpct_disableFirmware();
 	call	_cpct_disableFirmware
 ;src/main.c:10: cpct_fw2hw     (g_palette, 4);
-	ld	de,#_g_palette
-	ld	a,#0x04
-	push	af
-	inc	sp
-	push	de
+	ld	hl,#_g_palette
+	ld	bc,#0x0004
+	push	bc
+	push	hl
 	call	_cpct_fw2hw
-	pop	af
-	inc	sp
 ;src/main.c:11: cpct_setPalette(g_palette, 4);
-	ld	de,#_g_palette
-	ld	a,#0x04
-	push	af
-	inc	sp
-	push	de
+	ld	hl,#_g_palette
+	ld	bc,#0x0004
+	push	bc
+	push	hl
 	call	_cpct_setPalette
-	pop	af
-	inc	sp
 ;src/main.c:12: cpct_setBorder (g_palette[3]);
 	ld	a, (#_g_palette + 3)
 	ld	d,a

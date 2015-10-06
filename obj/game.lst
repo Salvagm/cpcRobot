@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
-                              3 ; Version 3.5.0 #9253 (Sep 26 2015) (Linux)
-                              4 ; This file was generated Mon Oct  5 21:06:19 2015
+                              3 ; Version 3.5.4 #9329 (Linux)
+                              4 ; This file was generated Tue Oct  6 16:24:27 2015
                               5 ;--------------------------------------------------------
                               6 	.module game
                               7 	.optsdcc -mz80
@@ -10,279 +10,306 @@
                              10 ; Public variables in this module
                              11 ;--------------------------------------------------------
                              12 	.globl _drawAll
-                             13 	.globl _cpct_waitVSYNC
-                             14 	.globl _cpct_drawSolidBox
-                             15 	.globl _cpct_drawSpriteMasked
-                             16 	.globl _cpct_px2byteM1
-                             17 	.globl _cpct_isKeyPressed
-                             18 	.globl _cpct_scanKeyboard_f
-                             19 	.globl _pvideomem
-                             20 	.globl _character
-                             21 	.globl _initializeGameScreen
-                             22 	.globl _updateUser
-                             23 	.globl _game
-                             24 ;--------------------------------------------------------
-                             25 ; special function registers
+                             13 	.globl _getPlayer
+                             14 	.globl _cpct_getScreenPtr
+                             15 	.globl _cpct_waitVSYNC
+                             16 	.globl _cpct_drawSolidBox
+                             17 	.globl _cpct_drawSpriteMasked
+                             18 	.globl _cpct_px2byteM1
+                             19 	.globl _cpct_isKeyPressed
+                             20 	.globl _cpct_scanKeyboard_f
+                             21 	.globl _pvideomem
+                             22 	.globl _player
+                             23 	.globl _initializeGameScreen
+                             24 	.globl _updateUser
+                             25 	.globl _game
                              26 ;--------------------------------------------------------
-                             27 ;--------------------------------------------------------
-                             28 ; ram data
+                             27 ; special function registers
+                             28 ;--------------------------------------------------------
                              29 ;--------------------------------------------------------
-                             30 	.area _DATA
-   0000                      31 _character::
-   0000                      32 	.ds 4
-   0004                      33 _pvideomem::
-   0004                      34 	.ds 2
-                             35 ;--------------------------------------------------------
-                             36 ; ram data
+                             30 ; ram data
+                             31 ;--------------------------------------------------------
+                             32 	.area _DATA
+   0000                      33 _player::
+   0000                      34 	.ds 2
+   0002                      35 _pvideomem::
+   0002                      36 	.ds 2
                              37 ;--------------------------------------------------------
-                             38 	.area _INITIALIZED
+                             38 ; ram data
                              39 ;--------------------------------------------------------
-                             40 ; absolute external ram data
+                             40 	.area _INITIALIZED
                              41 ;--------------------------------------------------------
-                             42 	.area _DABS (ABS)
+                             42 ; absolute external ram data
                              43 ;--------------------------------------------------------
-                             44 ; global & static initialisations
+                             44 	.area _DABS (ABS)
                              45 ;--------------------------------------------------------
-                             46 	.area _HOME
-                             47 	.area _GSINIT
-                             48 	.area _GSFINAL
+                             46 ; global & static initialisations
+                             47 ;--------------------------------------------------------
+                             48 	.area _HOME
                              49 	.area _GSINIT
-                             50 ;--------------------------------------------------------
-                             51 ; Home
+                             50 	.area _GSFINAL
+                             51 	.area _GSINIT
                              52 ;--------------------------------------------------------
-                             53 	.area _HOME
-                             54 	.area _HOME
-                             55 ;--------------------------------------------------------
-                             56 ; code
+                             53 ; Home
+                             54 ;--------------------------------------------------------
+                             55 	.area _HOME
+                             56 	.area _HOME
                              57 ;--------------------------------------------------------
-                             58 	.area _CODE
-                             59 ;src/game.c:23: void initializeGameScreen() {
-                             60 ;	---------------------------------
-                             61 ; Function initializeGameScreen
-                             62 ; ---------------------------------
-   0000                      63 _initializeGameScreen::
-                             64 ;src/game.c:25: cpct_drawSolidBox(INIT_VMEM, cpct_px2byteM1(1, 1, 1, 1), 64, 200);
-   0000 21 01 01      [10]   65 	ld	hl,#0x0101
-   0003 E5            [11]   66 	push	hl
-   0004 2E 01         [ 7]   67 	ld	l, #0x01
-   0006 E5            [11]   68 	push	hl
-   0007 CDr00r00      [17]   69 	call	_cpct_px2byteM1
-   000A F1            [10]   70 	pop	af
-   000B F1            [10]   71 	pop	af
-   000C 55            [ 4]   72 	ld	d,l
-   000D 21 40 C8      [10]   73 	ld	hl,#0xC840
-   0010 E5            [11]   74 	push	hl
-   0011 D5            [11]   75 	push	de
-   0012 33            [ 6]   76 	inc	sp
-   0013 21 00 C0      [10]   77 	ld	hl,#0xC000
-   0016 E5            [11]   78 	push	hl
-   0017 CDr00r00      [17]   79 	call	_cpct_drawSolidBox
-   001A F1            [10]   80 	pop	af
-   001B F1            [10]   81 	pop	af
-   001C 33            [ 6]   82 	inc	sp
-                             83 ;src/game.c:26: cpct_drawSolidBox(INIT_VMEM + 64, cpct_px2byteM1(1, 1, 1, 1), 16, 200);
-   001D 21 01 01      [10]   84 	ld	hl,#0x0101
-   0020 E5            [11]   85 	push	hl
-   0021 2E 01         [ 7]   86 	ld	l, #0x01
-   0023 E5            [11]   87 	push	hl
-   0024 CDr00r00      [17]   88 	call	_cpct_px2byteM1
-   0027 F1            [10]   89 	pop	af
-   0028 F1            [10]   90 	pop	af
-   0029 55            [ 4]   91 	ld	d,l
-   002A 21 10 C8      [10]   92 	ld	hl,#0xC810
-   002D E5            [11]   93 	push	hl
-   002E D5            [11]   94 	push	de
-   002F 33            [ 6]   95 	inc	sp
-   0030 21 40 C0      [10]   96 	ld	hl,#0xC040
-   0033 E5            [11]   97 	push	hl
-   0034 CDr00r00      [17]   98 	call	_cpct_drawSolidBox
-   0037 F1            [10]   99 	pop	af
-   0038 F1            [10]  100 	pop	af
-   0039 33            [ 6]  101 	inc	sp
-   003A C9            [10]  102 	ret
-                            103 ;src/game.c:29: void updateUser() {
-                            104 ;	---------------------------------
-                            105 ; Function updateUser
-                            106 ; ---------------------------------
-   003B                     107 _updateUser::
-                            108 ;src/game.c:32: x = &(character.pe->de->e->c->x);
-   003B 2Ar00r00      [16]  109 	ld	hl, (#_character + 0)
-   003E 7E            [ 7]  110 	ld	a, (hl)
-   003F 23            [ 6]  111 	inc	hl
-   0040 66            [ 7]  112 	ld	h,(hl)
-   0041 6F            [ 4]  113 	ld	l,a
-   0042 7E            [ 7]  114 	ld	a, (hl)
-   0043 23            [ 6]  115 	inc	hl
-   0044 66            [ 7]  116 	ld	h,(hl)
-   0045 6F            [ 4]  117 	ld	l,a
-   0046 11 04 00      [10]  118 	ld	de, #0x0004
-   0049 19            [11]  119 	add	hl, de
-   004A 5E            [ 7]  120 	ld	e,(hl)
-   004B 23            [ 6]  121 	inc	hl
-   004C 56            [ 7]  122 	ld	d,(hl)
-                            123 ;src/game.c:35: cpct_scanKeyboard_f();
-   004D D5            [11]  124 	push	de
-   004E CDr00r00      [17]  125 	call	_cpct_scanKeyboard_f
-   0051 21 00 02      [10]  126 	ld	hl,#0x0200
-   0054 CDr00r00      [17]  127 	call	_cpct_isKeyPressed
-   0057 7D            [ 4]  128 	ld	a,l
-   0058 D1            [10]  129 	pop	de
-   0059 B7            [ 4]  130 	or	a, a
-   005A 28 13         [12]  131 	jr	Z,00105$
-   005C 1A            [ 7]  132 	ld	a,(de)
-   005D 67            [ 4]  133 	ld	h,a
-   005E D6 4C         [ 7]  134 	sub	a, #0x4C
-   0060 30 0D         [12]  135 	jr	NC,00105$
-   0062 7C            [ 4]  136 	ld	a,h
-   0063 3C            [ 4]  137 	inc	a
-   0064 12            [ 7]  138 	ld	(de),a
-   0065 21r04r00      [10]  139 	ld	hl, #_pvideomem+0
-   0068 34            [11]  140 	inc	(hl)
-   0069 C0            [11]  141 	ret	NZ
-   006A 21r05r00      [10]  142 	ld	hl, #_pvideomem+1
-   006D 34            [11]  143 	inc	(hl)
-   006E C9            [10]  144 	ret
-   006F                     145 00105$:
-                            146 ;src/game.c:37: else if (cpct_isKeyPressed(Key_CursorLeft)  && (*x) >   0        ) { --(*x); --pvideomem; }
-   006F D5            [11]  147 	push	de
-   0070 21 01 01      [10]  148 	ld	hl,#0x0101
-   0073 CDr00r00      [17]  149 	call	_cpct_isKeyPressed
-   0076 7D            [ 4]  150 	ld	a,l
-   0077 D1            [10]  151 	pop	de
-   0078 B7            [ 4]  152 	or	a, a
-   0079 C8            [11]  153 	ret	Z
-   007A 1A            [ 7]  154 	ld	a,(de)
-   007B B7            [ 4]  155 	or	a, a
-   007C C8            [11]  156 	ret	Z
-   007D C6 FF         [ 7]  157 	add	a,#0xFF
-   007F 12            [ 7]  158 	ld	(de),a
-   0080 2Ar04r00      [16]  159 	ld	hl,(_pvideomem)
-   0083 2B            [ 6]  160 	dec	hl
-   0084 22r04r00      [16]  161 	ld	(_pvideomem),hl
-   0087 C9            [10]  162 	ret
-                            163 ;src/game.c:47: void drawAll(){
-                            164 ;	---------------------------------
-                            165 ; Function drawAll
-                            166 ; ---------------------------------
-   0088                     167 _drawAll::
-                            168 ;src/game.c:49: cpct_drawSpriteMasked(character.pe->de->e->sprite, pvideomem, SPR_W, SPR_H);
-   0088 ED 4Br04r00   [20]  169 	ld	bc,(_pvideomem)
-   008C 2Ar00r00      [16]  170 	ld	hl, (#_character + 0)
-   008F 7E            [ 7]  171 	ld	a, (hl)
-   0090 23            [ 6]  172 	inc	hl
-   0091 66            [ 7]  173 	ld	h,(hl)
-   0092 6F            [ 4]  174 	ld	l,a
-   0093 7E            [ 7]  175 	ld	a, (hl)
-   0094 23            [ 6]  176 	inc	hl
-   0095 66            [ 7]  177 	ld	h,(hl)
-   0096 6F            [ 4]  178 	ld	l,a
-   0097 23            [ 6]  179 	inc	hl
-   0098 23            [ 6]  180 	inc	hl
-   0099 5E            [ 7]  181 	ld	e,(hl)
-   009A 23            [ 6]  182 	inc	hl
-   009B 56            [ 7]  183 	ld	d,(hl)
-   009C 21 04 10      [10]  184 	ld	hl,#0x1004
-   009F E5            [11]  185 	push	hl
-   00A0 C5            [11]  186 	push	bc
-   00A1 D5            [11]  187 	push	de
-   00A2 CDr00r00      [17]  188 	call	_cpct_drawSpriteMasked
-   00A5 C9            [10]  189 	ret
-                            190 ;src/game.c:52: void game() {
-                            191 ;	---------------------------------
-                            192 ; Function game
-                            193 ; ---------------------------------
-   00A6                     194 _game::
-                            195 ;src/game.c:54: character.lifes = 1;   
-   00A6 21r02r00      [10]  196 	ld	hl,#(_character + 0x0002)
-   00A9 36 01         [10]  197 	ld	(hl),#0x01
-                            198 ;src/game.c:55: character.pe->de->e->c->x = 0;
-   00AB 2Ar00r00      [16]  199 	ld	hl, (#_character + 0)
-   00AE 7E            [ 7]  200 	ld	a, (hl)
-   00AF 23            [ 6]  201 	inc	hl
-   00B0 66            [ 7]  202 	ld	h,(hl)
-   00B1 6F            [ 4]  203 	ld	l,a
-   00B2 7E            [ 7]  204 	ld	a, (hl)
-   00B3 23            [ 6]  205 	inc	hl
-   00B4 66            [ 7]  206 	ld	h,(hl)
-   00B5 6F            [ 4]  207 	ld	l,a
-   00B6 11 04 00      [10]  208 	ld	de, #0x0004
-   00B9 19            [11]  209 	add	hl, de
-   00BA 5E            [ 7]  210 	ld	e,(hl)
-   00BB 23            [ 6]  211 	inc	hl
-   00BC 56            [ 7]  212 	ld	d,(hl)
-   00BD AF            [ 4]  213 	xor	a, a
-   00BE 12            [ 7]  214 	ld	(de),a
-                            215 ;src/game.c:56: character.pe->de->e->c->y = 0;
-   00BF 2Ar00r00      [16]  216 	ld	hl, (#_character + 0)
-   00C2 7E            [ 7]  217 	ld	a, (hl)
-   00C3 23            [ 6]  218 	inc	hl
-   00C4 66            [ 7]  219 	ld	h,(hl)
-   00C5 6F            [ 4]  220 	ld	l,a
-   00C6 7E            [ 7]  221 	ld	a, (hl)
-   00C7 23            [ 6]  222 	inc	hl
-   00C8 66            [ 7]  223 	ld	h,(hl)
-   00C9 6F            [ 4]  224 	ld	l,a
-   00CA 11 04 00      [10]  225 	ld	de, #0x0004
-   00CD 19            [11]  226 	add	hl, de
-   00CE 5E            [ 7]  227 	ld	e,(hl)
-   00CF 23            [ 6]  228 	inc	hl
-   00D0 56            [ 7]  229 	ld	d,(hl)
-   00D1 13            [ 6]  230 	inc	de
-   00D2 AF            [ 4]  231 	xor	a, a
-   00D3 12            [ 7]  232 	ld	(de),a
-                            233 ;src/game.c:57: character.pe->de->e->sprite = g_character;
-   00D4 2Ar00r00      [16]  234 	ld	hl, (#_character + 0)
-   00D7 7E            [ 7]  235 	ld	a, (hl)
-   00D8 23            [ 6]  236 	inc	hl
-   00D9 66            [ 7]  237 	ld	h,(hl)
-   00DA 6F            [ 4]  238 	ld	l,a
-   00DB 5E            [ 7]  239 	ld	e,(hl)
-   00DC 23            [ 6]  240 	inc	hl
-   00DD 56            [ 7]  241 	ld	d,(hl)
-   00DE 13            [ 6]  242 	inc	de
-   00DF 13            [ 6]  243 	inc	de
-   00E0 6B            [ 4]  244 	ld	l,e
-   00E1 01r00r00      [10]  245 	ld	bc,#_g_character+0
-   00E4 62            [ 4]  246 	ld	h, d
-   00E5 71            [ 7]  247 	ld	(hl),c
-   00E6 23            [ 6]  248 	inc	hl
-   00E7 70            [ 7]  249 	ld	(hl),b
-                            250 ;src/game.c:59: pvideomem = INIT_VMEM; 
-   00E8 21 00 C0      [10]  251 	ld	hl,#0xC000
-   00EB 22r04r00      [16]  252 	ld	(_pvideomem),hl
-                            253 ;src/game.c:61: initializeGameScreen();   // Set up Game Screen
-   00EE CDr00r00      [17]  254 	call	_initializeGameScreen
-                            255 ;src/game.c:66: while(character.lifes > 0) {      
-   00F1                     256 00101$:
-   00F1 3Ar02r00      [13]  257 	ld	a, (#(_character + 0x0002) + 0)
-   00F4 B7            [ 4]  258 	or	a, a
-   00F5 C8            [11]  259 	ret	Z
-                            260 ;src/game.c:67: cpct_waitVSYNC();            
-   00F6 CDr00r00      [17]  261 	call	_cpct_waitVSYNC
-                            262 ;src/game.c:69: cpct_drawSolidBox(pvideomem, cpct_px2byteM1(1, 1, 1, 1), SPR_W, SPR_H);
-   00F9 21 01 01      [10]  263 	ld	hl,#0x0101
-   00FC E5            [11]  264 	push	hl
-   00FD 2E 01         [ 7]  265 	ld	l, #0x01
-   00FF E5            [11]  266 	push	hl
-   0100 CDr00r00      [17]  267 	call	_cpct_px2byteM1
-   0103 F1            [10]  268 	pop	af
-   0104 F1            [10]  269 	pop	af
-   0105 45            [ 4]  270 	ld	b,l
-   0106 ED 5Br04r00   [20]  271 	ld	de,(_pvideomem)
-   010A 21 04 10      [10]  272 	ld	hl,#0x1004
-   010D E5            [11]  273 	push	hl
-   010E C5            [11]  274 	push	bc
-   010F 33            [ 6]  275 	inc	sp
-   0110 D5            [11]  276 	push	de
-   0111 CDr00r00      [17]  277 	call	_cpct_drawSolidBox
-   0114 F1            [10]  278 	pop	af
-   0115 F1            [10]  279 	pop	af
-   0116 33            [ 6]  280 	inc	sp
-                            281 ;src/game.c:70: updateUser();                
-   0117 CDr3Br00      [17]  282 	call	_updateUser
-                            283 ;src/game.c:71: drawAll();                   
-   011A CDr88r00      [17]  284 	call	_drawAll
-   011D 18 D2         [12]  285 	jr	00101$
-                            286 	.area _CODE
-                            287 	.area _INITIALIZER
-                            288 	.area _CABS (ABS)
+                             58 ; code
+                             59 ;--------------------------------------------------------
+                             60 	.area _CODE
+                             61 ;src/game.c:22: void initializeGameScreen() {
+                             62 ;	---------------------------------
+                             63 ; Function initializeGameScreen
+                             64 ; ---------------------------------
+   0000                      65 _initializeGameScreen::
+                             66 ;src/game.c:24: cpct_drawSolidBox(INIT_VMEM, cpct_px2byteM1(1, 1, 1, 1), 64, 200);
+   0000 21 01 01      [10]   67 	ld	hl,#0x0101
+   0003 E5            [11]   68 	push	hl
+   0004 2E 01         [ 7]   69 	ld	l, #0x01
+   0006 E5            [11]   70 	push	hl
+   0007 CDr00r00      [17]   71 	call	_cpct_px2byteM1
+   000A F1            [10]   72 	pop	af
+   000B F1            [10]   73 	pop	af
+   000C 55            [ 4]   74 	ld	d,l
+   000D 21 40 C8      [10]   75 	ld	hl,#0xC840
+   0010 E5            [11]   76 	push	hl
+   0011 D5            [11]   77 	push	de
+   0012 33            [ 6]   78 	inc	sp
+   0013 21 00 C0      [10]   79 	ld	hl,#0xC000
+   0016 E5            [11]   80 	push	hl
+   0017 CDr00r00      [17]   81 	call	_cpct_drawSolidBox
+   001A F1            [10]   82 	pop	af
+   001B F1            [10]   83 	pop	af
+   001C 33            [ 6]   84 	inc	sp
+                             85 ;src/game.c:25: cpct_drawSolidBox(INIT_VMEM + 64, cpct_px2byteM1(1, 1, 1, 1), 16, 200);
+   001D 21 01 01      [10]   86 	ld	hl,#0x0101
+   0020 E5            [11]   87 	push	hl
+   0021 2E 01         [ 7]   88 	ld	l, #0x01
+   0023 E5            [11]   89 	push	hl
+   0024 CDr00r00      [17]   90 	call	_cpct_px2byteM1
+   0027 F1            [10]   91 	pop	af
+   0028 F1            [10]   92 	pop	af
+   0029 55            [ 4]   93 	ld	d,l
+   002A 21 10 C8      [10]   94 	ld	hl,#0xC810
+   002D E5            [11]   95 	push	hl
+   002E D5            [11]   96 	push	de
+   002F 33            [ 6]   97 	inc	sp
+   0030 21 40 C0      [10]   98 	ld	hl,#0xC040
+   0033 E5            [11]   99 	push	hl
+   0034 CDr00r00      [17]  100 	call	_cpct_drawSolidBox
+   0037 F1            [10]  101 	pop	af
+   0038 F1            [10]  102 	pop	af
+   0039 33            [ 6]  103 	inc	sp
+   003A C9            [10]  104 	ret
+                            105 ;src/game.c:28: void updateUser() {
+                            106 ;	---------------------------------
+                            107 ; Function updateUser
+                            108 ; ---------------------------------
+   003B                     109 _updateUser::
+   003B DD E5         [15]  110 	push	ix
+   003D DD 21 00 00   [14]  111 	ld	ix,#0
+   0041 DD 39         [15]  112 	add	ix,sp
+   0043 F5            [11]  113 	push	af
+                            114 ;src/game.c:31: x = &(player->pe.de.e.c.x);
+   0044 ED 4Br00r00   [20]  115 	ld	bc,(_player)
+   0048 21 04 00      [10]  116 	ld	hl,#0x0004
+   004B 09            [11]  117 	add	hl,bc
+   004C EB            [ 4]  118 	ex	de,hl
+                            119 ;src/game.c:32: y = &(player->pe.de.e.c.y);
+   004D 21 05 00      [10]  120 	ld	hl,#0x0005
+   0050 09            [11]  121 	add	hl,bc
+   0051 E3            [19]  122 	ex	(sp), hl
+                            123 ;src/game.c:34: cpct_scanKeyboard_f();
+   0052 D5            [11]  124 	push	de
+   0053 CDr00r00      [17]  125 	call	_cpct_scanKeyboard_f
+   0056 21 00 02      [10]  126 	ld	hl,#0x0200
+   0059 CDr00r00      [17]  127 	call	_cpct_isKeyPressed
+   005C 7D            [ 4]  128 	ld	a,l
+   005D D1            [10]  129 	pop	de
+   005E B7            [ 4]  130 	or	a, a
+   005F 28 1E         [12]  131 	jr	Z,00105$
+   0061 1A            [ 7]  132 	ld	a,(de)
+   0062 4F            [ 4]  133 	ld	c,a
+   0063 D6 4C         [ 7]  134 	sub	a, #0x4C
+   0065 30 18         [12]  135 	jr	NC,00105$
+                            136 ;src/game.c:36: pvideomem = cpct_getScreenPtr(INIT_VMEM,++(*x),*y);
+   0067 E1            [10]  137 	pop	hl
+   0068 E5            [11]  138 	push	hl
+   0069 46            [ 7]  139 	ld	b,(hl)
+   006A 79            [ 4]  140 	ld	a,c
+   006B 3C            [ 4]  141 	inc	a
+   006C 12            [ 7]  142 	ld	(de),a
+   006D D5            [11]  143 	push	de
+   006E C5            [11]  144 	push	bc
+   006F 33            [ 6]  145 	inc	sp
+   0070 F5            [11]  146 	push	af
+   0071 33            [ 6]  147 	inc	sp
+   0072 21 00 C0      [10]  148 	ld	hl,#0xC000
+   0075 E5            [11]  149 	push	hl
+   0076 CDr00r00      [17]  150 	call	_cpct_getScreenPtr
+   0079 D1            [10]  151 	pop	de
+   007A 22r02r00      [16]  152 	ld	(_pvideomem),hl
+   007D 18 26         [12]  153 	jr	00106$
+   007F                     154 00105$:
+                            155 ;src/game.c:38: else if (cpct_isKeyPressed(Key_CursorLeft)  && (*x) >   0        ) {
+   007F D5            [11]  156 	push	de
+   0080 21 01 01      [10]  157 	ld	hl,#0x0101
+   0083 CDr00r00      [17]  158 	call	_cpct_isKeyPressed
+   0086 7D            [ 4]  159 	ld	a,l
+   0087 D1            [10]  160 	pop	de
+   0088 B7            [ 4]  161 	or	a, a
+   0089 28 1A         [12]  162 	jr	Z,00106$
+   008B 1A            [ 7]  163 	ld	a,(de)
+   008C B7            [ 4]  164 	or	a, a
+   008D 28 16         [12]  165 	jr	Z,00106$
+                            166 ;src/game.c:39: pvideomem = cpct_getScreenPtr(INIT_VMEM,--(*x),*y);
+   008F E1            [10]  167 	pop	hl
+   0090 E5            [11]  168 	push	hl
+   0091 46            [ 7]  169 	ld	b,(hl)
+   0092 C6 FF         [ 7]  170 	add	a,#0xFF
+   0094 12            [ 7]  171 	ld	(de),a
+   0095 D5            [11]  172 	push	de
+   0096 C5            [11]  173 	push	bc
+   0097 33            [ 6]  174 	inc	sp
+   0098 F5            [11]  175 	push	af
+   0099 33            [ 6]  176 	inc	sp
+   009A 21 00 C0      [10]  177 	ld	hl,#0xC000
+   009D E5            [11]  178 	push	hl
+   009E CDr00r00      [17]  179 	call	_cpct_getScreenPtr
+   00A1 D1            [10]  180 	pop	de
+   00A2 22r02r00      [16]  181 	ld	(_pvideomem),hl
+   00A5                     182 00106$:
+                            183 ;src/game.c:41: if      (cpct_isKeyPressed(Key_CursorUp)    && *y >   0        ) { 
+   00A5 D5            [11]  184 	push	de
+   00A6 21 00 01      [10]  185 	ld	hl,#0x0100
+   00A9 CDr00r00      [17]  186 	call	_cpct_isKeyPressed
+   00AC 7D            [ 4]  187 	ld	a,l
+   00AD D1            [10]  188 	pop	de
+   00AE B7            [ 4]  189 	or	a, a
+   00AF 28 1D         [12]  190 	jr	Z,00112$
+   00B1 E1            [10]  191 	pop	hl
+   00B2 E5            [11]  192 	push	hl
+   00B3 7E            [ 7]  193 	ld	a,(hl)
+   00B4 B7            [ 4]  194 	or	a, a
+   00B5 28 17         [12]  195 	jr	Z,00112$
+                            196 ;src/game.c:42: *y = (*y)-3;
+   00B7 C6 FD         [ 7]  197 	add	a,#0xFD
+   00B9 47            [ 4]  198 	ld	b,a
+   00BA E1            [10]  199 	pop	hl
+   00BB E5            [11]  200 	push	hl
+   00BC 70            [ 7]  201 	ld	(hl),b
+                            202 ;src/game.c:43: pvideomem = cpct_getScreenPtr(INIT_VMEM, *x, *y); 
+   00BD 1A            [ 7]  203 	ld	a,(de)
+   00BE C5            [11]  204 	push	bc
+   00BF 33            [ 6]  205 	inc	sp
+   00C0 F5            [11]  206 	push	af
+   00C1 33            [ 6]  207 	inc	sp
+   00C2 21 00 C0      [10]  208 	ld	hl,#0xC000
+   00C5 E5            [11]  209 	push	hl
+   00C6 CDr00r00      [17]  210 	call	_cpct_getScreenPtr
+   00C9 22r02r00      [16]  211 	ld	(_pvideomem),hl
+   00CC 18 29         [12]  212 	jr	00115$
+   00CE                     213 00112$:
+                            214 ;src/game.c:45: else if (cpct_isKeyPressed(Key_CursorDown)  && *y < 197 - SPR_H) { 
+   00CE D5            [11]  215 	push	de
+   00CF 21 00 04      [10]  216 	ld	hl,#0x0400
+   00D2 CDr00r00      [17]  217 	call	_cpct_isKeyPressed
+   00D5 7D            [ 4]  218 	ld	a,l
+   00D6 D1            [10]  219 	pop	de
+   00D7 B7            [ 4]  220 	or	a, a
+   00D8 28 1D         [12]  221 	jr	Z,00115$
+   00DA E1            [10]  222 	pop	hl
+   00DB E5            [11]  223 	push	hl
+   00DC 46            [ 7]  224 	ld	b,(hl)
+   00DD 78            [ 4]  225 	ld	a,b
+   00DE D6 B5         [ 7]  226 	sub	a, #0xB5
+   00E0 30 15         [12]  227 	jr	NC,00115$
+                            228 ;src/game.c:46: *y = (*y)+3;
+   00E2 04            [ 4]  229 	inc	b
+   00E3 04            [ 4]  230 	inc	b
+   00E4 04            [ 4]  231 	inc	b
+   00E5 E1            [10]  232 	pop	hl
+   00E6 E5            [11]  233 	push	hl
+   00E7 70            [ 7]  234 	ld	(hl),b
+                            235 ;src/game.c:47: pvideomem = cpct_getScreenPtr(INIT_VMEM, *x, *y); 
+   00E8 1A            [ 7]  236 	ld	a,(de)
+   00E9 C5            [11]  237 	push	bc
+   00EA 33            [ 6]  238 	inc	sp
+   00EB F5            [11]  239 	push	af
+   00EC 33            [ 6]  240 	inc	sp
+   00ED 21 00 C0      [10]  241 	ld	hl,#0xC000
+   00F0 E5            [11]  242 	push	hl
+   00F1 CDr00r00      [17]  243 	call	_cpct_getScreenPtr
+   00F4 22r02r00      [16]  244 	ld	(_pvideomem),hl
+   00F7                     245 00115$:
+   00F7 DD F9         [10]  246 	ld	sp, ix
+   00F9 DD E1         [14]  247 	pop	ix
+   00FB C9            [10]  248 	ret
+                            249 ;src/game.c:51: void drawAll(){
+                            250 ;	---------------------------------
+                            251 ; Function drawAll
+                            252 ; ---------------------------------
+   00FC                     253 _drawAll::
+                            254 ;src/game.c:53: cpct_drawSpriteMasked(player->pe.de.e.sprite, pvideomem, SPR_W, SPR_H);
+   00FC ED 4Br02r00   [20]  255 	ld	bc,(_pvideomem)
+   0100 2Ar00r00      [16]  256 	ld	hl,(_player)
+   0103 23            [ 6]  257 	inc	hl
+   0104 23            [ 6]  258 	inc	hl
+   0105 5E            [ 7]  259 	ld	e,(hl)
+   0106 23            [ 6]  260 	inc	hl
+   0107 56            [ 7]  261 	ld	d,(hl)
+   0108 21 04 10      [10]  262 	ld	hl,#0x1004
+   010B E5            [11]  263 	push	hl
+   010C C5            [11]  264 	push	bc
+   010D D5            [11]  265 	push	de
+   010E CDr00r00      [17]  266 	call	_cpct_drawSpriteMasked
+   0111 C9            [10]  267 	ret
+                            268 ;src/game.c:56: void game() {
+                            269 ;	---------------------------------
+                            270 ; Function game
+                            271 ; ---------------------------------
+   0112                     272 _game::
+                            273 ;src/game.c:58: player = getPlayer();
+   0112 CDr00r00      [17]  274 	call	_getPlayer
+   0115 22r00r00      [16]  275 	ld	(_player),hl
+                            276 ;src/game.c:64: pvideomem = INIT_VMEM; 
+   0118 21 00 C0      [10]  277 	ld	hl,#0xC000
+   011B 22r02r00      [16]  278 	ld	(_pvideomem),hl
+                            279 ;src/game.c:66: initializeGameScreen();   // Set up Game Screen
+   011E CDr00r00      [17]  280 	call	_initializeGameScreen
+                            281 ;src/game.c:71: while(player->lifes > 0) {      
+   0121                     282 00101$:
+   0121 FD 2Ar00r00   [20]  283 	ld	iy,(_player)
+   0125 FD 7E 10      [19]  284 	ld	a,16 (iy)
+   0128 B7            [ 4]  285 	or	a, a
+   0129 C8            [11]  286 	ret	Z
+                            287 ;src/game.c:72: cpct_waitVSYNC();            
+   012A CDr00r00      [17]  288 	call	_cpct_waitVSYNC
+                            289 ;src/game.c:74: cpct_drawSolidBox(pvideomem, cpct_px2byteM1(1, 1, 1, 1), SPR_W, SPR_H);
+   012D 21 01 01      [10]  290 	ld	hl,#0x0101
+   0130 E5            [11]  291 	push	hl
+   0131 2E 01         [ 7]  292 	ld	l, #0x01
+   0133 E5            [11]  293 	push	hl
+   0134 CDr00r00      [17]  294 	call	_cpct_px2byteM1
+   0137 F1            [10]  295 	pop	af
+   0138 F1            [10]  296 	pop	af
+   0139 45            [ 4]  297 	ld	b,l
+   013A ED 5Br02r00   [20]  298 	ld	de,(_pvideomem)
+   013E 21 04 10      [10]  299 	ld	hl,#0x1004
+   0141 E5            [11]  300 	push	hl
+   0142 C5            [11]  301 	push	bc
+   0143 33            [ 6]  302 	inc	sp
+   0144 D5            [11]  303 	push	de
+   0145 CDr00r00      [17]  304 	call	_cpct_drawSolidBox
+   0148 F1            [10]  305 	pop	af
+   0149 F1            [10]  306 	pop	af
+   014A 33            [ 6]  307 	inc	sp
+                            308 ;src/game.c:75: updateUser();                
+   014B CDr3Br00      [17]  309 	call	_updateUser
+                            310 ;src/game.c:76: drawAll();                   
+   014E CDrFCr00      [17]  311 	call	_drawAll
+   0151 18 CE         [12]  312 	jr	00101$
+                            313 	.area _CODE
+                            314 	.area _INITIALIZER
+                            315 	.area _CABS (ABS)

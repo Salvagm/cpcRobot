@@ -3,6 +3,11 @@
 
 #include <types.h>
 
+#define INIT_VMEM (u8*)0xC000
+///////////////////////////////////////
+/// ESTRUCTURAS BASCICAS PARA ENTIDADES
+///////////////////////////////////////
+
 
 //
 // Rectangulo para colisiones
@@ -19,8 +24,8 @@ typedef struct Entity {
 
 	u8		 *pscreen;  // Pointer to Screen Video memory location where entity will be drawn     
 	//TODO pasar a animaciones
-	u8 const  *sprite;
-	TCollider	   *c;
+	u8 	  	  *sprite;
+	TCollider	    c;
 
 } TEntity;
 
@@ -29,7 +34,7 @@ typedef struct Entity {
 //
 typedef struct DynamicEntity {   
 
-	TEntity 	    *e;
+	TEntity 	     e;
 	u8       *npscreen;  // Pointer the next Screen Video memory location where entity will be drawn   
 	u8          nx, ny;  // Next X, Y coordinates of entity in the screen (in bytes)         
 
@@ -38,7 +43,7 @@ typedef struct DynamicEntity {
 // Entidad con propiedades fisicas (velocidad, rozamiento...)
 
 typedef struct PhysicEntity {
-	TDynEntity		*de;
+	TDynEntity		 de;
 	i8  		 vx, vy;    // Velocidad en y e y
 	u8 	   		 ax, ay;		// Aceleracion en x e y
 
@@ -48,10 +53,16 @@ typedef struct PhysicEntity {
 
 typedef struct Character {
 	
-	TPhyEntity 	 *pe;
+	TPhyEntity 	  pe;
 	u8 		   lifes;
 	u8		 bullets;
 
 } TCharacter;
 
+
+////////////////////////////////////
+/// FUNCIONES ASOCIADAS A ENTIDADES
+////////////////////////////////////
+
+TCharacter* getPlayer();
 #endif

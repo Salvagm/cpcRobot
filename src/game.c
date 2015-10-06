@@ -3,11 +3,10 @@
 #include "game.h"
 #include "entities/entities.h"
 
-#define INIT_VMEM (u8*)0xC000
 
 /** TODO PASAR ESTOS ATRIBUTOS A ENTIDADES **/
 
-TCharacter character;
+TCharacter *player;
 
 /** FIN TODO ENTIDADES **/
 
@@ -29,32 +28,38 @@ void initializeGameScreen() {
 void updateUser() {
 
    u8  *x, *y;
-   x = &(character.pe->de->e->c->x);
-   y = &(character.pe->de->e->c->y);
+   x = &(player->pe.de.e.c.x);
+   y = &(player->pe.de.e.c.y);
    //Comprobamos si se pulsa alguna tecla y movemos al personaje principal
    cpct_scanKeyboard_f();
-   if      (cpct_isKeyPressed(Key_CursorRight) && (*x) <  80 - SPR_W) { ++(*x); ++pvideomem; }
-   else if (cpct_isKeyPressed(Key_CursorLeft)  && (*x) >   0        ) { --(*x); --pvideomem; }
-   // if      (cpct_isKeyPressed(Key_CursorUp)    && *y >   0        ) { 
-   //    *y = (*y)-3;
-   //    pvideomem = cpct_getScreenPtr(INIT_VMEM, *x, *y); 
-   // }
-   // else if (cpct_isKeyPressed(Key_CursorDown)  && *y < 197 - SPR_H) { 
-   //    *y = (*y)+3;
-   //    pvideomem = cpct_getScreenPtr(INIT_VMEM, *x, *y); 
-   // }
+   if      (cpct_isKeyPressed(Key_CursorRight) && (*x) <  80 - SPR_W) { 
+      pvideomem = cpct_getScreenPtr(INIT_VMEM,++(*x),*y);
+   }
+   else if (cpct_isKeyPressed(Key_CursorLeft)  && (*x) >   0        ) {
+      pvideomem = cpct_getScreenPtr(INIT_VMEM,--(*x),*y);
+   }
+   if      (cpct_isKeyPressed(Key_CursorUp)    && *y >   0        ) { 
+      *y = (*y)-3;
+      pvideomem = cpct_getScreenPtr(INIT_VMEM, *x, *y); 
+   }
+   else if (cpct_isKeyPressed(Key_CursorDown)  && *y < 197 - SPR_H) { 
+      *y = (*y)+3;
+      pvideomem = cpct_getScreenPtr(INIT_VMEM, *x, *y); 
+   }
+
 }
 void drawAll(){
    
-   cpct_drawSpriteMasked(character.pe->de->e->sprite, pvideomem, SPR_W, SPR_H);
+   cpct_drawSpriteMasked(player->pe.de.e.sprite, pvideomem, SPR_W, SPR_H);
 }
 
 void game() {
    
-   character.lifes = 1;   
-   character.pe->de->e->c->x = 0;
-   character.pe->de->e->c->y = 0;
-   character.pe->de->e->sprite = g_character;
+   player = getPlayer();
+   // character.lifes = 1;   
+   // character.pe->de->e->c->x = 0;
+   // character.pe->de->e->c->y = 0;
+   // character.pe.de.e.sprite = g_character[0];
    
    pvideomem = INIT_VMEM; 
 
@@ -63,7 +68,7 @@ void game() {
    /////
    // Main Game Loop (while character is alive)
    /////
-   while(character.lifes > 0) {      
+   while(player->lifes > 0) {      
       cpct_waitVSYNC();            
       //Limpiamos la posicion del personaje 
       cpct_drawSolidBox(pvideomem, cpct_px2byteM1(1, 1, 1, 1), SPR_W, SPR_H);

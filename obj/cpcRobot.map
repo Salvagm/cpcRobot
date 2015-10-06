@@ -17,69 +17,71 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000000  l__INITIALIZER                  
      00000000  s__CABS                         
      00000000  s__DABS                         
-     00000006  l__DATA                         
+     00000004  l__DATA                         
      00000100  s__CODE                         
-     00000479  l__CODE                         
-     00000579  s__DATA                         
-     0000057F  s__GSFINAL                      
-     0000057F  s__GSINIT                       
-     0000057F  s__HOME                         
-     0000057F  s__INITIALIZED                  
-     0000057F  s__INITIALIZER                  
+     000004CB  l__CODE                         
+     000005CB  s__DATA                         
+     000005CF  s__GSFINAL                      
+     000005CF  s__GSINIT                       
+     000005CF  s__HOME                         
+     000005CF  s__INITIALIZED                  
+     000005CF  s__INITIALIZER                  
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00000100    00000479 =        1145. bytes (REL,CON)
+_CODE                               00000100    000004CB =        1227. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
      00000100  _initializeGameScreen              game
      0000013B  _updateUser                        game
-     00000188  _drawAll                           game
-     000001A6  _game                              game
-     0000021F  _init                              main
-     0000024F  _main                              main
-     00000257  _g_palette                         sprites
-     0000025B  _g_character                       sprites
-     000002DB  _cpct_setPalette                   cpct_video
-     000002E4  cpct_setPalette_asm                cpct_video
-     000002FF  _cpct_isKeyPressed                 cpct_keyboard
-     000002FF  cpct_isKeyPressed_asm              cpct_keyboard
-     0000030B  _cpct_scanKeyboard_f               cpct_keyboard
-     0000030B  cpct_scanKeyboard_f_asm            cpct_keyboard
-     00000375  _cpct_setPALColour                 cpct_video
-     00000381  _cpct_fw2hw                        cpct_video
-     0000039B  _cpct_keyboardStatusBuffer         cpct_keyboard
-     000003A5  _cpct_drawSpriteMasked             cpct_sprites
-     000003D4  cpct_firmware2hw_colour            
-     000003EF  _cpct_setVideoMode                 cpct_video
-     000003F4  cpct_setVideoMode_asm              cpct_video
-     00000401  _cpct_waitVSYNC                    cpct_video
-     00000401  cpct_waitVSYNC_asm                 cpct_video
-     00000409  _cpct_px2byteM1                    cpct_sprites
-     00000422  _cpct_mode_rom_status              cpct_firmware
-     00000423  _cpct_firmware_address             cpct_firmware
-     00000425  _cpct_disableFirmware              cpct_firmware
-     00000425  cpct_disableFirmware_asm           cpct_firmware
-     00000436  _cpct_drawSolidBox                 cpct_sprites
-     000004EE  dc_mode1_ct                        cpct_strings
-     000004F2  _cpct_drawCharM1                   cpct_strings
-     000004FF  cpct_drawCharM1_asm                cpct_strings
+     000001FC  _drawAll                           game
+     00000212  _game                              game
+     00000253  _init                              main
+     0000027F  _main                              main
+     00000287  _g_palette                         sprites
+     0000028B  _g_character                       sprites
+     0000030B  _getPlayer                         entities
+     0000030F  _character                         entities
+     00000321  _cpct_setPalette                   cpct_video
+     00000338  _cpct_isKeyPressed                 cpct_keyboard
+     00000338  cpct_isKeyPressed_asm              cpct_keyboard
+     00000344  _cpct_scanKeyboard_f               cpct_keyboard
+     00000344  cpct_scanKeyboard_f_asm            cpct_keyboard
+     000003AE  _cpct_setPALColour                 cpct_video
+     000003BA  _cpct_fw2hw                        cpct_video
+     000003CD  _cpct_keyboardStatusBuffer         cpct_keyboard
+     000003D7  _cpct_drawSpriteMasked             cpct_sprites
+     00000406  cpct_firmware2hw_colour            
+     00000421  _cpct_setVideoMode                 cpct_video
+     00000426  cpct_setVideoMode_asm              cpct_video
+     00000433  _cpct_waitVSYNC                    cpct_video
+     00000433  cpct_waitVSYNC_asm                 cpct_video
+     0000043B  _cpct_px2byteM1                    cpct_sprites
+     00000454  _cpct_mode_rom_status              cpct_firmware
+     00000455  _cpct_firmware_address             cpct_firmware
+     00000457  _cpct_disableFirmware              cpct_firmware
+     00000457  cpct_disableFirmware_asm           cpct_firmware
+     00000468  _cpct_drawSolidBox                 cpct_sprites
+     00000520  _cpct_getScreenPtr                 cpct_video
+     00000540  dc_mode1_ct                        cpct_strings
+     00000544  _cpct_drawCharM1                   cpct_strings
+     00000551  cpct_drawCharM1_asm                cpct_strings
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_DATA                               00000579    00000006 =           6. bytes (REL,CON)
+_DATA                               000005CB    00000004 =           4. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00000579  _character                         game
-     0000057D  _pvideomem                         game
+     000005CB  _player                            game
+     000005CD  _pvideomem                         game
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
 
@@ -87,39 +89,41 @@ Files Linked                              [ module(s) ]
 
 obj/game.rel                              [ game ]
 obj/main.rel                              [ main ]
-obj/entities/entities.rel                 [ entities ]
 obj/sprites/sprites.rel                   [ sprites ]
+obj/entities/entities.rel                 [ entities ]
 
 
 Libraries Linked                          [ object file ]
 
-/home/javi/cpctelera-master/cpctelera/cpctelera.lib
-                                          [ cpct_setPalette.rel ]
-/home/javi/cpctelera-master/cpctelera/cpctelera.lib
+/home/salva/Documentos/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_setPalette_cbindings.rel ]
+/home/salva/Documentos/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_isKeyPressed.rel ]
-/home/javi/cpctelera-master/cpctelera/cpctelera.lib
+/home/salva/Documentos/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_scanKeyboard_f.rel ]
-/home/javi/cpctelera-master/cpctelera/cpctelera.lib
+/home/salva/Documentos/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_setPALColour_cbindings.rel ]
-/home/javi/cpctelera-master/cpctelera/cpctelera.lib
-                                          [ cpct_fw2hw.rel ]
-/home/javi/cpctelera-master/cpctelera/cpctelera.lib
+/home/salva/Documentos/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_fw2hw_cbindings.rel ]
+/home/salva/Documentos/cpctelera/cpctelera/cpctelera.lib
                                           [ keyboard.rel ]
-/home/javi/cpctelera-master/cpctelera/cpctelera.lib
+/home/salva/Documentos/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_drawSpriteMasked_cbindings. ]
-/home/javi/cpctelera-master/cpctelera/cpctelera.lib
+/home/salva/Documentos/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_firmware2hw_colour_table.re ]
-/home/javi/cpctelera-master/cpctelera/cpctelera.lib
+/home/salva/Documentos/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_setVideoMode.rel ]
-/home/javi/cpctelera-master/cpctelera/cpctelera.lib
+/home/salva/Documentos/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_waitVSYNC.rel ]
-/home/javi/cpctelera-master/cpctelera/cpctelera.lib
+/home/salva/Documentos/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_px2byteM1.rel ]
-/home/javi/cpctelera-master/cpctelera/cpctelera.lib
+/home/salva/Documentos/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_disableFirmware.rel ]
-/home/javi/cpctelera-master/cpctelera/cpctelera.lib
+/home/salva/Documentos/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_drawSolidBox_cbindings.rel ]
-/home/javi/cpctelera-master/cpctelera/cpctelera.lib
+/home/salva/Documentos/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_getScreenPtr_cbindings.rel ]
+/home/salva/Documentos/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_drawCharM1.rel ]
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
