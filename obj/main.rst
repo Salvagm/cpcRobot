@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 3.5.0 #9253 (Sep 26 2015) (Linux)
-                              4 ; This file was generated Mon Oct  5 20:23:12 2015
+                              4 ; This file was generated Mon Oct  5 21:06:19 2015
                               5 ;--------------------------------------------------------
                               6 	.module main
                               7 	.optsdcc -mz80
@@ -52,52 +52,52 @@
                              52 ;	---------------------------------
                              53 ; Function init
                              54 ; ---------------------------------
-   022D                      55 _init::
+   021F                      55 _init::
                              56 ;src/main.c:8: cpct_disableFirmware();
-   022D CD 33 04      [17]   57 	call	_cpct_disableFirmware
+   021F CD 25 04      [17]   57 	call	_cpct_disableFirmware
                              58 ;src/main.c:10: cpct_fw2hw     (g_palette, 4);
-   0230 11 65 02      [10]   59 	ld	de,#_g_palette
-   0233 3E 04         [ 7]   60 	ld	a,#0x04
-   0235 F5            [11]   61 	push	af
-   0236 33            [ 6]   62 	inc	sp
-   0237 D5            [11]   63 	push	de
-   0238 CD 8F 03      [17]   64 	call	_cpct_fw2hw
-   023B F1            [10]   65 	pop	af
-   023C 33            [ 6]   66 	inc	sp
+   0222 11 57 02      [10]   59 	ld	de,#_g_palette
+   0225 3E 04         [ 7]   60 	ld	a,#0x04
+   0227 F5            [11]   61 	push	af
+   0228 33            [ 6]   62 	inc	sp
+   0229 D5            [11]   63 	push	de
+   022A CD 81 03      [17]   64 	call	_cpct_fw2hw
+   022D F1            [10]   65 	pop	af
+   022E 33            [ 6]   66 	inc	sp
                              67 ;src/main.c:11: cpct_setPalette(g_palette, 4);
-   023D 11 65 02      [10]   68 	ld	de,#_g_palette
-   0240 3E 04         [ 7]   69 	ld	a,#0x04
-   0242 F5            [11]   70 	push	af
-   0243 33            [ 6]   71 	inc	sp
-   0244 D5            [11]   72 	push	de
-   0245 CD E9 02      [17]   73 	call	_cpct_setPalette
-   0248 F1            [10]   74 	pop	af
-   0249 33            [ 6]   75 	inc	sp
+   022F 11 57 02      [10]   68 	ld	de,#_g_palette
+   0232 3E 04         [ 7]   69 	ld	a,#0x04
+   0234 F5            [11]   70 	push	af
+   0235 33            [ 6]   71 	inc	sp
+   0236 D5            [11]   72 	push	de
+   0237 CD DB 02      [17]   73 	call	_cpct_setPalette
+   023A F1            [10]   74 	pop	af
+   023B 33            [ 6]   75 	inc	sp
                              76 ;src/main.c:12: cpct_setBorder (g_palette[3]);
-   024A 3A 68 02      [13]   77 	ld	a, (#_g_palette + 3)
-   024D 57            [ 4]   78 	ld	d,a
-   024E 1E 10         [ 7]   79 	ld	e,#0x10
-   0250 D5            [11]   80 	push	de
-   0251 CD 83 03      [17]   81 	call	_cpct_setPALColour
+   023C 3A 5A 02      [13]   77 	ld	a, (#_g_palette + 3)
+   023F 57            [ 4]   78 	ld	d,a
+   0240 1E 10         [ 7]   79 	ld	e,#0x10
+   0242 D5            [11]   80 	push	de
+   0243 CD 75 03      [17]   81 	call	_cpct_setPALColour
                              82 ;src/main.c:14: cpct_setVideoMode(1);
-   0254 3E 01         [ 7]   83 	ld	a,#0x01
-   0256 F5            [11]   84 	push	af
-   0257 33            [ 6]   85 	inc	sp
-   0258 CD FD 03      [17]   86 	call	_cpct_setVideoMode
-   025B 33            [ 6]   87 	inc	sp
-   025C C9            [10]   88 	ret
+   0246 3E 01         [ 7]   83 	ld	a,#0x01
+   0248 F5            [11]   84 	push	af
+   0249 33            [ 6]   85 	inc	sp
+   024A CD EF 03      [17]   86 	call	_cpct_setVideoMode
+   024D 33            [ 6]   87 	inc	sp
+   024E C9            [10]   88 	ret
                              89 ;src/main.c:17: void main(void) {
                              90 ;	---------------------------------
                              91 ; Function main
                              92 ; ---------------------------------
-   025D                      93 _main::
+   024F                      93 _main::
                              94 ;src/main.c:19: init();         
-   025D CD 2D 02      [17]   95 	call	_init
+   024F CD 1F 02      [17]   95 	call	_init
                              96 ;src/main.c:21: while (1){
-   0260                      97 00102$:
+   0252                      97 00102$:
                              98 ;src/main.c:22: game();
-   0260 CD E7 01      [17]   99 	call	_game
-   0263 18 FB         [12]  100 	jr	00102$
+   0252 CD A6 01      [17]   99 	call	_game
+   0255 18 FB         [12]  100 	jr	00102$
                             101 	.area _CODE
                             102 	.area _INITIALIZER
                             103 	.area _CABS (ABS)

@@ -8,7 +8,7 @@
 // Rectangulo para colisiones
 //
 typedef struct Collider {
-	u8    x, y;    // Screen coordinates of the top-left square of the collision
+	u8    x, y;    // // Sprite coordinates (in bytes)  
 	u8    w, h;    // Width and height in bytes   
 } TCollider;
 
@@ -19,7 +19,7 @@ typedef struct Entity {
 
 	u8		 *pscreen;  // Pointer to Screen Video memory location where entity will be drawn     
 	//TODO pasar a animaciones
-	u8		  *sprite;
+	u8 const  *sprite;
 	TCollider	   *c;
 
 } TEntity;
