@@ -13,26 +13,26 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000000  l__GSFINAL                      
      00000000  l__GSINIT                       
      00000000  l__HOME                         
-     00000000  l__INITIALIZED                  
-     00000000  l__INITIALIZER                  
      00000000  s__CABS                         
      00000000  s__DABS                         
-     00000004  l__DATA                         
+     00000004  l__INITIALIZED                  
+     00000004  l__INITIALIZER                  
+     0000002C  l__DATA                         
      00000100  s__CODE                         
-     0000053E  l__CODE                         
-     0000063E  s__DATA                         
-     00000642  s__GSFINAL                      
-     00000642  s__GSINIT                       
-     00000642  s__HOME                         
-     00000642  s__INITIALIZED                  
-     00000642  s__INITIALIZER                  
+     000006D8  l__CODE                         
+     000007D8  s__DATA                         
+     00000804  s__INITIALIZED                  
+     00000808  s__GSFINAL                      
+     00000808  s__GSINIT                       
+     00000808  s__HOME                         
+     00000808  s__INITIALIZER                  
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00000100    0000053E =        1342. bytes (REL,CON)
+_CODE                               00000100    000006D8 =        1752. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -40,55 +40,86 @@ _CODE                               00000100    0000053E =        1342. bytes (R
      0000013B  _updateUser                        game
      00000265  _drawAll                           game
      000002A3  _game                              game
-     000002C6  _init                              main
-     000002F2  _main                              main
-     000002FA  _g_palette                         sprites
-     000002FE  _g_character                       sprites
-     0000037E  _getPlayer                         entities
-     00000382  _character                         entities
-     00000394  _cpct_setPalette                   cpct_video
-     000003AB  _cpct_isKeyPressed                 cpct_keyboard
-     000003AB  cpct_isKeyPressed_asm              cpct_keyboard
-     000003B7  _cpct_scanKeyboard_f               cpct_keyboard
-     000003B7  cpct_scanKeyboard_f_asm            cpct_keyboard
-     00000421  _cpct_setPALColour                 cpct_video
-     0000042D  _cpct_fw2hw                        cpct_video
-     00000440  _cpct_keyboardStatusBuffer         cpct_keyboard
-     0000044A  _cpct_drawSpriteMasked             cpct_sprites
-     00000479  cpct_firmware2hw_colour            
-     00000494  _cpct_setVideoMode                 cpct_video
-     00000499  cpct_setVideoMode_asm              cpct_video
-     000004A6  _cpct_waitVSYNC                    cpct_video
-     000004A6  cpct_waitVSYNC_asm                 cpct_video
-     000004AE  _cpct_px2byteM1                    cpct_sprites
-     000004C7  _cpct_mode_rom_status              cpct_firmware
-     000004C8  _cpct_firmware_address             cpct_firmware
-     000004CA  _cpct_disableFirmware              cpct_firmware
-     000004CA  cpct_disableFirmware_asm           cpct_firmware
-     000004DB  _cpct_drawSolidBox                 cpct_sprites
-     00000593  _cpct_getScreenPtr                 cpct_video
-     000005B3  dc_mode1_ct                        cpct_strings
-     000005B7  _cpct_drawCharM1                   cpct_strings
-     000005C4  cpct_drawCharM1_asm                cpct_strings
+     000002D1  _init                              main
+     000002FD  _main                              main
+     00000305  _insertInCollisionArray            physics
+     0000039A  _addStaticCollider                 physics
+     0000042F  _resetIndex                        physics
+     00000444  _g_palette                         sprites
+     00000448  _g_character                       sprites
+     000004C8  _getPlayer                         entities
+     000004CC  _character                         entities
+     000004E0  _createMapCollider                 entities
+     0000052E  _cpct_setPalette                   cpct_video
+     00000545  _cpct_isKeyPressed                 cpct_keyboard
+     00000545  cpct_isKeyPressed_asm              cpct_keyboard
+     00000551  _cpct_scanKeyboard_f               cpct_keyboard
+     00000551  cpct_scanKeyboard_f_asm            cpct_keyboard
+     000005BB  _cpct_setPALColour                 cpct_video
+     000005C7  _cpct_fw2hw                        cpct_video
+     000005DA  _cpct_keyboardStatusBuffer         cpct_keyboard
+     000005E4  _cpct_drawSpriteMasked             cpct_sprites
+     00000613  cpct_firmware2hw_colour            
+     0000062E  _cpct_setVideoMode                 cpct_video
+     00000633  cpct_setVideoMode_asm              cpct_video
+     00000640  _cpct_waitVSYNC                    cpct_video
+     00000640  cpct_waitVSYNC_asm                 cpct_video
+     00000648  _cpct_px2byteM1                    cpct_sprites
+     00000661  _cpct_mode_rom_status              cpct_firmware
+     00000662  _cpct_firmware_address             cpct_firmware
+     00000664  _cpct_disableFirmware              cpct_firmware
+     00000664  cpct_disableFirmware_asm           cpct_firmware
+     00000675  _cpct_drawSolidBox                 cpct_sprites
+     0000072D  _cpct_getScreenPtr                 cpct_video
+     0000074D  dc_mode1_ct                        cpct_strings
+     00000751  _cpct_drawCharM1                   cpct_strings
+     0000075E  cpct_drawCharM1_asm                cpct_strings
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_DATA                               0000063E    00000004 =           4. bytes (REL,CON)
+_DATA                               000007D8    0000002C =          44. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     0000063E  _player                            game
-     00000640  _pvideomem                         game
-
+     000007D8  _player                            game
+     000007DA  _pvideomem                         game
+     000007DC  _BLstaticColliders                 physics
+     000007E6  _BRstaticColliders                 physics
+     000007F0  _TLstaticColliders                 physics
+     000007FA  _TRstaticColliders                 physics
 ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_INITIALIZED                        00000804    00000004 =           4. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00000804  _botLeftIndex                      physics
+     00000805  _topLeftIndex                      physics
+     00000806  _botRighttIndex                    physics
+     00000807  _topRightIndex                     physics
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_INITIALIZER                        00000808    00000004 =           4. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00 + NoICE + sdld,  page 6.
 
 Files Linked                              [ module(s) ]
 
 obj/game.rel                              [ game ]
 obj/main.rel                              [ main ]
+obj/utilities/physics.rel                 [ physics ]
 obj/sprites/sprites.rel                   [ sprites ]
 obj/entities/entities.rel                 [ entities ]
 
@@ -126,7 +157,7 @@ Libraries Linked                          [ object file ]
 /home/salva/Documentos/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_drawCharM1.rel ]
 
-ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 7.
 
 User Base Address Definitions
 

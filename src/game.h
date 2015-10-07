@@ -6,6 +6,6 @@
 //
 // Functions defined in the game module
 //
-void game                 ();
+void game();
 
 #endif

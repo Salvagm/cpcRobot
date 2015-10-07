@@ -8,13 +8,15 @@
 /// ESTRUCTURAS BASCICAS PARA ENTIDADES
 ///////////////////////////////////////
 
+struct Entity;
 
 //
 // Rectangulo para colisiones
 //
 typedef struct Collider {
-	u8    x, y;    // // Sprite coordinates (in bytes)  
-	u8    w, h;    // Width and height in bytes   
+	u8    		x, y;    // // Sprite coordinates (in bytes)  
+	u8    		w, h;    // Width and height in bytes   
+	struct Entity *e;	// para saber el tipo de entidad con la que chocas
 } TCollider;
 
 //
@@ -65,4 +67,6 @@ typedef struct Character {
 ////////////////////////////////////
 
 TCharacter* getPlayer();
+TCollider* createMapCollider(u8,u8,u8,u8);
+
 #endif

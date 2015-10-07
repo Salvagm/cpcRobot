@@ -14,7 +14,8 @@ const TCharacter character ={
             {
                0,0, // x,y
                SPR_W,SPR_H // w,h
-            }
+            },
+
 
          },
          INIT_VMEM,
@@ -35,4 +36,15 @@ const TCharacter character ={
 TCharacter *getPlayer()
 {
 	return &character;
+}
+
+TCollider *createMapCollider(u8 x, u8 y, u8 width, u8 height)
+{
+   TCollider col = 
+   {
+      x,y,width,height,
+      0  // Tiene una entidad vacia
+   };
+
+   return &col;
 }

@@ -2,6 +2,7 @@
 #include "sprites/sprites.h"
 #include "game.h"
 #include "entities/entities.h"
+#include "utilities/physics.h"
 
 
 /** TODO PASAR ESTOS ATRIBUTOS A ENTIDADES **/
@@ -57,6 +58,7 @@ void drawAll(){
 void game() {
    
    player = getPlayer();
+   player->pe.de.e.c.e = &player->pe.de.e;
    // character.lifes = 1;   
    // character.pe->de->e->c->x = 0;
    // character.pe->de->e->c->y = 0;
