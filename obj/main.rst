@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 3.5.4 #9329 (Linux)
-                              4 ; This file was generated Tue Oct  6 15:22:14 2015
+                              4 ; This file was generated Mon Oct 12 17:40:40 2015
                               5 ;--------------------------------------------------------
                               6 	.module main
                               7 	.optsdcc -mz80
@@ -54,30 +54,30 @@
                              54 ; ---------------------------------
    02D1                      55 _init::
                              56 ;src/main.c:8: cpct_disableFirmware();
-   02D1 CD 64 06      [17]   57 	call	_cpct_disableFirmware
+   02D1 CD 72 07      [17]   57 	call	_cpct_disableFirmware
                              58 ;src/main.c:10: cpct_fw2hw     (g_palette, 4);
-   02D4 21 44 04      [10]   59 	ld	hl,#_g_palette
+   02D4 21 52 05      [10]   59 	ld	hl,#_g_palette
    02D7 01 04 00      [10]   60 	ld	bc,#0x0004
    02DA C5            [11]   61 	push	bc
    02DB E5            [11]   62 	push	hl
-   02DC CD C7 05      [17]   63 	call	_cpct_fw2hw
+   02DC CD D5 06      [17]   63 	call	_cpct_fw2hw
                              64 ;src/main.c:11: cpct_setPalette(g_palette, 4);
-   02DF 21 44 04      [10]   65 	ld	hl,#_g_palette
+   02DF 21 52 05      [10]   65 	ld	hl,#_g_palette
    02E2 01 04 00      [10]   66 	ld	bc,#0x0004
    02E5 C5            [11]   67 	push	bc
    02E6 E5            [11]   68 	push	hl
-   02E7 CD 2E 05      [17]   69 	call	_cpct_setPalette
+   02E7 CD 3C 06      [17]   69 	call	_cpct_setPalette
                              70 ;src/main.c:12: cpct_setBorder (g_palette[3]);
-   02EA 3A 47 04      [13]   71 	ld	a, (#_g_palette + 3)
+   02EA 3A 55 05      [13]   71 	ld	a, (#_g_palette + 3)
    02ED 57            [ 4]   72 	ld	d,a
    02EE 1E 10         [ 7]   73 	ld	e,#0x10
    02F0 D5            [11]   74 	push	de
-   02F1 CD BB 05      [17]   75 	call	_cpct_setPALColour
+   02F1 CD C9 06      [17]   75 	call	_cpct_setPALColour
                              76 ;src/main.c:14: cpct_setVideoMode(1);
    02F4 3E 01         [ 7]   77 	ld	a,#0x01
    02F6 F5            [11]   78 	push	af
    02F7 33            [ 6]   79 	inc	sp
-   02F8 CD 2E 06      [17]   80 	call	_cpct_setVideoMode
+   02F8 CD 3C 07      [17]   80 	call	_cpct_setVideoMode
    02FB 33            [ 6]   81 	inc	sp
    02FC C9            [10]   82 	ret
                              83 ;src/main.c:17: void main(void) {
